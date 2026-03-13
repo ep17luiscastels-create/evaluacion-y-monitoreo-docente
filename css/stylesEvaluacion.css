@@ -596,9 +596,9 @@ body {
   font-size: 15px;
 }
 
-/* ── PDF PREVIEW ── */
-#pdfPreviewArea {
-  margin-bottom: 20px;
+/* Oculto en pantalla, visible al imprimir */
+.firmas-print {
+  display: none;
 }
 
 @media (max-width: 600px) {
@@ -610,5 +610,61 @@ body {
   }
   .panel {
     padding: 18px 16px 22px;
+  }
+}
+
+* {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media print {
+  .step-bar,
+  .progress-wrap,
+  .btn-row,
+  .error-msg {
+    display: none !important;
+  }
+  .panel {
+    display: block !important;
+  }
+
+  .firmas-print {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20mm;
+    page-break-inside: avoid;
+  }
+
+  /* Tamaño y márgenes */
+  @page {
+    size: A4;
+    margin-top: 25mm;
+    margin-right: 15mm;
+    margin-bottom: 15mm;
+    margin-left: 15mm;
+  }
+  /* Evitar cortes en medio de elementos */
+  .panel {
+    margin-top: 10mm;
+  }
+
+  .rubrica-section {
+    page-break-inside: avoid;
+  }
+  .foda-grid {
+    page-break-inside: avoid;
+  }
+  .firmas-row {
+    page-break-inside: avoid;
+  }
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* Sacar bordes y sombras */
+  .container {
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
 }

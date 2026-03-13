@@ -191,7 +191,9 @@ function addRowToBody(tbody, dimId) {
 
 /* ── GUARDAR PDF (usa pdfUtils.js) ── */
 function guardarPDFMon() {
+  console.log('html generado:', html ? 'OK' : 'VACIO');
   if (!pdfCache) return;
+  console.log('html generado:', html ? 'OK' : 'VACIO');
   var d = DOCENTES[parseInt(document.getElementById('selectDocente').value)];
   PDFUtils.descargar(pdfCache, 'monitoreo_' + d.apellido + '.pdf');
 }
