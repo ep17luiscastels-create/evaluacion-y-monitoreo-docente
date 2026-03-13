@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monitoreo Carpeta Didáctica — EP N°17</title>
+    <link rel="stylesheet" href="stylesMonitoreo.css" />
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo-wrap"><img src="./assets/logo.jpg" alt="EP N°17" /></div>
+        <div class="header-text">
+          <h1>Monitoreo de Carpeta Didáctica</h1>
+          <p>EP N°17 "Luis Castells" &nbsp;·&nbsp; Directora: Quinteros Vanesa</p>
+        </div>
+      </div>
+
+      <div class="body">
+        <div class="section-title">
+          <div class="bar"></div>
+          Datos generales
+        </div>
+        <div class="datos-grid">
+          <div class="dato">
+            <label>Docente *</label>
+            <select id="selectDocente" onchange="onDocenteChange()">
+              <option value="">— Seleccionar docente —</option>
+            </select>
+          </div>
+          <div class="dato">
+            <label>Grado / Sección</label>
+            <input type="text" id="gradoSeccion" readonly placeholder="Se completa al seleccionar" />
+          </div>
+          <div class="dato full">
+            <label>Fecha y Período *</label>
+            <input type="text" id="fechaPeriodo" placeholder="Ej: Marzo 2025 — 1er bimestre" />
+          </div>
+        </div>
+
+        <div class="section-title">
+          <div class="bar"></div>
+          Período observado
+        </div>
+        <div class="meses-grid" id="mesesGrid"></div>
+
+        <div class="section-title" style="margin-top: 6px">
+          <div class="bar"></div>
+          Dimensiones observadas
+        </div>
+        <div id="dimensionesContainer"></div>
+
+        <div class="firmas-row">
+          <div class="firma-box">
+            <img src="./assets/firma.jpg" class="firma-img" />
+            <div class="firma-linea">
+              <div class="firma-nombre">QUINTEROS VANESA</div>
+              <div class="firma-cargo">Directora EP N°17 "Luis Castells"</div>
+            </div>
+          </div>
+          <div class="firma-box">
+            <div class="firma-espacio"></div>
+            <div class="firma-linea">
+              <div class="firma-nombre" id="firmaDocenteNombre">Docente</div>
+              <div class="firma-cargo" id="firmaDocenteCargo">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="limpiarFormulario()">↺ Limpiar</button>
+          <button class="btn btn-primary" id="btnGenerar" onclick="mostrarPreviewMon()" style="min-width: 180px">
+            📄 Vista previa
+          </button>
+          <button
+            class="btn btn-primary"
+            id="btnGuardar"
+            onclick="guardarPDFMon()"
+            style="min-width: 180px; display: none"
+          >
+            ⬇ Guardar PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orden de carga: datos → utilidades PDF → lógica principal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="./data/dataMonitoreo.js"></script>
+    <script src="./js/pdfUtils.js"></script>
+    <script src="./js/scriptsMonitoreo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evaluación Docente — EP N°17</title>
+    <link rel="stylesheet" href="./css/stylesEvaluacion.css" />
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <!-- Imágenes en base64 (ocultas, leídas por scriptsEvaluacion.js) -->
+
+    <div class="container">
+      <div class="header">
+        <div class="logo-wrap"><img src="./assets/logo.jpg" alt="EP N°17" /></div>
+        <div class="header-text">
+          <h1>Rúbrica de Evaluación Docente</h1>
+          <p>EP N°17 "Luis Castells" &nbsp;·&nbsp; Directora: Quinteros Vanesa</p>
+        </div>
+      </div>
+
+      <div class="step-bar">
+        <div
+          class="step active"
+          id="step1"
+          style="cursor: pointer"
+          onclick="if (1 <= maxStep || 1 == currentStep + 1) goToStep(1);"
+        >
+          <span class="step-num">1</span>Datos
+        </div>
+        <div
+          class="step"
+          id="step2"
+          style="cursor: pointer"
+          onclick="if (2 <= maxStep || 2 == currentStep + 1) goToStep(2);"
+        >
+          <span class="step-num">2</span>Rúbrica
+        </div>
+        <div
+          class="step"
+          id="step3"
+          style="cursor: pointer"
+          onclick="if (3 <= maxStep || 3 == currentStep + 1) goToStep(3);"
+        >
+          <span class="step-num">3</span>FODA
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 25%"></div></div>
+      </div>
+
+      <!-- PANEL 1 — DATOS -->
+      <div class="panel active" id="panel1">
+        <div class="section-title">
+          <div class="bar"></div>
+          Datos de la clase observada
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Docente *</label>
+            <select id="selectDocente" onchange="onDocenteChange()">
+              <option value="">— Seleccionar docente —</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Fecha de observación *</label>
+            <input type="date" id="inputFecha" oninput="guardarEstado()" />
+          </div>
+          <div class="docente-card" id="docenteCard">
+            <div class="dc-item">Turno: <strong id="dcTurno">—</strong></div>
+            <div class="dc-item">Grado: <strong id="dcGrado">—</strong></div>
+            <div class="dc-item">Sección: <strong id="dcSeccion">—</strong></div>
+            <div class="dc-item">Email: <strong id="dcEmail">—</strong></div>
+          </div>
+          <div class="field">
+            <label>Área *</label>
+            <select id="inputArea" oninput="guardarEstado()">
+              <option value="">— Seleccionar —</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Contenido trabajado *</label>
+            <input
+              type="text"
+              id="inputContenido"
+              oninput="guardarEstado()"
+              placeholder="Ej: Lectura comprensiva de textos informativos"
+            />
+          </div>
+          <div class="field">
+            <label>Cantidad de estudiantes *</label>
+            <input type="number" id="inputAlumnos" oninput="guardarEstado()" min="1" max="45" placeholder="Ej: 25" />
+          </div>
+        </div>
+        <div class="error-msg" id="error1">Por favor completá todos los campos obligatorios.</div>
+        <div class="btn-row">
+          <div></div>
+          <button class="btn btn-primary" onclick="goToStep(2)">Siguiente → Rúbrica</button>
+        </div>
+      </div>
+
+      <!-- PANEL 2 — RÚBRICA -->
+      <div class="panel" id="panel2">
+        <div class="section-title">
+          <div class="bar"></div>
+          Rúbrica de evaluación
+        </div>
+        <div class="scale-legend">
+          <div class="scale-badge">
+            <div class="num">1</div>
+            Sobresaliente / Supera expectativas
+          </div>
+          <div class="scale-badge">
+            <div class="num">2</div>
+            Muy Bueno / Logrado
+          </div>
+          <div class="scale-badge">
+            <div class="num">3</div>
+            Bueno / En proceso
+          </div>
+          <div class="scale-badge">
+            <div class="num">4</div>
+            Revisitar las Prácticas / Para mejorar
+          </div>
+          <div class="scale-badge">
+            <div class="num">5</div>
+            No logra organizar y ejecutar acciones
+          </div>
+        </div>
+        <div id="rubricaContainer"></div>
+        <div class="error-msg" id="error2"></div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="goToStep(1)">← Volver</button>
+          <button class="btn btn-primary" onclick="goToStep(3)">Siguiente → FODA</button>
+        </div>
+      </div>
+
+      <!-- PANEL 3 — FODA -->
+      <div class="panel" id="panel3">
+        <div class="section-title">
+          <div class="bar"></div>
+          Análisis FODA
+        </div>
+        <p style="font-size: 12px; color: var(--muted); font-weight: 600">Todos los campos son opcionales.</p>
+        <div class="foda-grid">
+          <div class="foda-box">
+            <label>FORTALEZAS</label
+            ><textarea
+              id="fodaFortalezas"
+              oninput="guardarEstado()"
+              placeholder="Aspectos positivos observados..."
+            ></textarea>
+          </div>
+          <div class="foda-box">
+            <label>DEBILIDADES</label
+            ><textarea id="fodaDebilidades" oninput="guardarEstado()" placeholder="Aspectos a mejorar..."></textarea>
+          </div>
+          <div class="foda-box">
+            <label>OPORTUNIDADES</label
+            ><textarea
+              id="fodaOportunidades"
+              oninput="guardarEstado()"
+              placeholder="Posibilidades de mejora..."
+            ></textarea>
+          </div>
+          <div class="foda-box">
+            <label>AMENAZAS</label
+            ><textarea
+              id="fodaAmenazas"
+              oninput="guardarEstado()"
+              placeholder="Factores externos que dificultan..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="goToStep(2)">← Volver</button>
+          <button class="btn btn-primary" onclick="guardarPDF()">⬇ Guardar PDF</button>
+        </div>
+      </div>
+
+      <!-- PANEL 4 — ÉXITO -->
+      <div class="panel" id="panel5">
+        <div class="success-box">
+          <div class="success-icon">✓</div>
+          <h2>¡PDF generado!</h2>
+          <p id="successMsg1">El documento está listo.</p>
+          <br />
+          <button class="btn btn-secondary" onclick="goToStep(1)" style="margin-top: 10px">✎ Modificar</button>
+          <button class="btn btn-secondary" onclick="nuevaEvaluacion()" style="margin-top: 10px">
+            + Nueva evaluación
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orden de carga: datos → utilidades PDF → lógica principal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="./data/dataEvaluacion.js"></script>
+    <script src="./js/pdfUtils.js"></script>
+    <script src="./js/scriptsEvaluacion.js"></script>
+  </body>
+</html>
