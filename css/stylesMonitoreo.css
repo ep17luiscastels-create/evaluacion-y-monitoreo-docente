@@ -471,9 +471,54 @@ body {
   background: var(--b5);
 }
 
-/* ── PDF PREVIEW ── */
-#pdfPreviewArea {
-  margin-bottom: 20px;
+.firmas-row {
+  display: none;
+}
+
+* {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.firmas-row {
+  display: none;
+}
+
+@media print {
+  .btn-row,
+  .add-row-btn,
+  .del-btn {
+    display: none !important;
+  }
+
+  .firmas-row {
+    display: flex !important;
+  }
+
+  @page {
+    size: A4;
+    margin-top: 25mm;
+    margin-right: 15mm;
+    margin-bottom: 15mm;
+    margin-left: 15mm;
+  }
+
+  .container {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .dim-block {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  .firmas-row {
+    page-break-inside: avoid;
+  }
 }
 
 @media (max-width: 600px) {
